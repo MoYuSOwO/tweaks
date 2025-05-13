@@ -4,6 +4,7 @@ import com.mojang.brigadier.Command;
 import core.paper.item.ItemBuilder;
 import io.papermc.paper.command.brigadier.Commands;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import net.kyori.adventure.text.minimessage.translation.Argument;
 import net.thenextlvl.tweaks.TweaksPlugin;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.HumanEntity;
@@ -177,8 +178,9 @@ public class InventoryCommand extends PlayerCommand implements Listener {
         private final Inventory inventory;
 
         private ViewableInventory(Player viewer, Player target) {
-            this.inventory = plugin.getServer().createInventory(this, 54, plugin.bundle().component(viewer,
-                    "gui.inventory.title", Placeholder.component("player", target.name())));
+            var title = plugin.bundle().component("gui.inventory.title", viewer,
+                    Argument.component("player", target.name()));
+            this.inventory = plugin.getServer().createInventory(this, 54, title);
             this.target = target;
             addPlaceholders(viewer);
             updateInventory();
@@ -205,22 +207,22 @@ public class InventoryCommand extends PlayerCommand implements Listener {
             var inventoryConfig = plugin.config().guis.inventory;
             var placeholder = ItemBuilder.of(inventoryConfig.placeholder).hideTooltip().item();
             inventory.setItem(36, ItemBuilder.of(inventoryConfig.helmet)
-                    .itemName(plugin.bundle().component(viewer, "gui.placeholder.helmet"))
+                    .itemName(plugin.bundle().component("gui.placeholder.helmet", viewer))
                     .item());
             inventory.setItem(37, ItemBuilder.of(inventoryConfig.chestplate)
-                    .itemName(plugin.bundle().component(viewer, "gui.placeholder.chestplate"))
+                    .itemName(plugin.bundle().component("gui.placeholder.chestplate", viewer))
                     .item());
             inventory.setItem(38, ItemBuilder.of(inventoryConfig.leggings)
-                    .itemName(plugin.bundle().component(viewer, "gui.placeholder.leggings"))
+                    .itemName(plugin.bundle().component("gui.placeholder.leggings", viewer))
                     .item());
             inventory.setItem(39, ItemBuilder.of(inventoryConfig.boots)
-                    .itemName(plugin.bundle().component(viewer, "gui.placeholder.boots"))
+                    .itemName(plugin.bundle().component("gui.placeholder.boots", viewer))
                     .item());
             inventory.setItem(41, ItemBuilder.of(inventoryConfig.offHand)
-                    .itemName(plugin.bundle().component(viewer, "gui.placeholder.off-hand"))
+                    .itemName(plugin.bundle().component("gui.placeholder.off-hand", viewer))
                     .item());
             inventory.setItem(43, ItemBuilder.of(inventoryConfig.cursor)
-                    .itemName(plugin.bundle().component(viewer, "gui.placeholder.cursor"))
+                    .itemName(plugin.bundle().component("gui.placeholder.cursor", viewer))
                     .item());
             IntStream.of(40, 42, 44, 49, 51, 53).forEach(i -> inventory.setItem(i, placeholder));
         }

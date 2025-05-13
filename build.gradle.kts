@@ -4,7 +4,7 @@ import net.minecrell.pluginyml.paper.PaperPluginDescription
 
 plugins {
     id("java")
-    id("com.gradleup.shadow") version "9.0.0-beta9"
+    id("com.gradleup.shadow") version "9.0.0-beta13"
     id("xyz.jpenilla.run-paper") version "2.3.1"
     id("de.eldoria.plugin-yml.paper") version "0.7.1"
     id("io.papermc.hangar-publish-plugin") version "0.1.3"
@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "net.thenextlvl.tweaks"
-version = "3.1.6"
+version = "3.1.9"
 
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(21)
@@ -30,13 +30,13 @@ repositories {
 
 dependencies {
     compileOnly("net.thenextlvl.services:service-io:2.2.0")
-    compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.21.5-R0.1-SNAPSHOT")
 
     implementation("net.thenextlvl.core:adapters:2.0.2")
-    implementation("net.thenextlvl.core:files:2.0.2")
-    implementation("net.thenextlvl.core:i18n:1.0.21")
-    implementation("net.thenextlvl.core:nbt:2.3.1")
-    implementation("net.thenextlvl.core:paper:2.0.4")
+    implementation("net.thenextlvl.core:files:3.0.0")
+    implementation("net.thenextlvl.core:i18n:3.2.0")
+    implementation("net.thenextlvl.core:nbt:2.3.2")
+    implementation("net.thenextlvl.core:paper:2.1.2")
     implementation("org.bstats:bstats-bukkit:3.1.0")
 }
 
@@ -46,14 +46,14 @@ tasks.shadowJar {
 }
 
 tasks.runServer {
-    minecraftVersion("1.21")
+    minecraftVersion("1.21.5")
 }
 
 paper {
     name = "Tweaks"
     main = "net.thenextlvl.tweaks.TweaksPlugin"
     description = "A useful command collection"
-    apiVersion = "1.21"
+    apiVersion = "1.21.5"
     website = "https://thenextlvl.net"
     authors = listOf("CyntrixAlgorithm", "NonSwag")
     load = BukkitPluginDescription.PluginLoadOrder.POSTWORLD

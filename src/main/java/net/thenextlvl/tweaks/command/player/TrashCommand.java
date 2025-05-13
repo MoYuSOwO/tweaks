@@ -28,9 +28,7 @@ public class TrashCommand {
 
     private int trash(CommandContext<CommandSourceStack> context) {
         var player = (Player) context.getSource().getSender();
-        player.openInventory(MenuType.GENERIC_9X4.create(player,
-                plugin.bundle().component(player, "gui.title.trash")
-        ));
+        player.openInventory(MenuType.GENERIC_9X4.create(player, plugin.bundle().component("gui.title.trash", player)));
         return Command.SINGLE_SUCCESS;
     }
 }
